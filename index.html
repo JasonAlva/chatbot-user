@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Welcome Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        color: #5a5a5a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+        color: #d1c9c9;
+        margin-bottom: 30px;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .button-container button {
+        font-size: 1em;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #3ad935;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button-container button:hover {
+        background-color: #3700b3;
+      }
+    </style>
+    <script>
+      function updateWelcomeMessage() {
+        const name = "Aditya";
+        const date = new Date();
+        const formattedDate = date.toLocaleDateString();
+        const formattedTime = date.toLocaleTimeString();
+
+        document.getElementById(
+          "welcome-message"
+        ).innerHTML = `WELCOME <br> ${name}, <br> IT IS <br> ${formattedDate} and ${formattedTime}`;
+      }
+
+      function navigateTo(url) {
+        window.open(url, "_blank");
+      }
+
+      function runSudoku() {
+        fetch("/runSudo")
+          .then((response) => response.text())
+          .then((data) => {
+            alert(data);
+          })
+          .catch((error) => {
+            alert("An error occurred: " + error);
+          });
+      }
+
+      function runMedicationSchedule() {
+        alert("This feature is under development.");
+      }
+
+      window.onload = updateWelcomeMessage;
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <h1 id="welcome-message">WELCOME</h1>
+      <h2>WHAT WOULD YOU LIKE TO DO??</h2>
+    </div>
+
+    <div class="button-container">
+      <button onclick="navigateTo('http://localhost:8501')">
+        Check Your Mood Based on Your Voice and Text
+      </button>
+      <button onclick="navigateTo('http://127.0.0.1:5000')">
+        Check Government Schemes
+      </button>
+      <button onclick="runSudoku()">Play Sudoku</button>
+      <button onclick="navigateTo('http://localhost:8501')">
+        Check For Book Recommendation, Similar to Your Book
+      </button>
+      <button onclick="runMedicationSchedule()">Medication Schedule</button>
+    </div>
+
+    <!-- Chat Toggle Button -->
+    <button class="chat-toggler">
+      <span class="material-icons"> mode_comment </span>
+    </button>
+
+    <!-- Chatbot Interface -->
+    <div class="chatbot">
+      <header>
+        <h2>ChatBot</h2>
+        <span id="chat-close" class="material-icons"> close </span>
+      </header>
+      <ul class="chatbox">
+        <li class="incoming chat">
+          <span class="material-icons"> smart_toy </span>
+          <p>
+            Hi there!!! <br />
+            How can I help you?
+          </p>
+        </li>
+      </ul>
+      <div class="chat-input">
+        <textarea placeholder="Enter text here.." required></textarea>
+        <span id="snd-btn" class="material-icons">send</span>
+      </div>
+    </div>
+  </body>
+</html>
